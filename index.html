@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Generative AI Engineer building agentic workflows, RAG pipelines and conversational analytics on the Databricks Lakehouse."><meta property="og:type" content="website"><meta property="og:title" content="Anand Srinet – Generative AI Engineer"><meta property="og:description" content="Agentic AI, hybrid RAG and conversational analytics for enterprise clients. Browse projects and experience."><meta name="twitter:card" content="summary"><title>Anand Srinet – Generative AI Engineer</title>
+<style>
+:root{
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg1:#dfe7fb;--bg2:#f6dff0;--bg3:#d9f1ee;--ink:#14182b;--mute:#4d5573;
+  --glass:rgba(255,255,255,.55);--glass2:rgba(255,255,255,.75);--edge:rgba(255,255,255,.9);--shadow:rgba(40,50,110,.18);
+  --acc:#4f5bff;--acc2:#b05cff;color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg1:#0d1030;--bg2:#2a1245;--bg3:#07303a;--ink:#f1f3ff;--mute:#a9b0d3;
+  --glass:rgba(255,255,255,.08);--glass2:rgba(255,255,255,.14);--edge:rgba(255,255,255,.22);--shadow:rgba(0,0,0,.5);
+  --acc:#8d97ff;--acc2:#d08bff;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg1:#0d1030;--bg2:#2a1245;--bg3:#07303a;--ink:#f1f3ff;--mute:#a9b0d3;
+  --glass:rgba(255,255,255,.08);--glass2:rgba(255,255,255,.14);--edge:rgba(255,255,255,.22);--shadow:rgba(0,0,0,.5);
+  --acc:#8d97ff;--acc2:#d08bff;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{background:var(--bg1);color:var(--ink);font:16px/1.6 ui-rounded,"SF Pro Rounded","Segoe UI Variable","Segoe UI",system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
+.sky{position:fixed;inset:0;z-index:-1;background:linear-gradient(135deg,var(--bg1),var(--bg2) 55%,var(--bg3))}
+.orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.7;animation:drift 22s ease-in-out infinite alternate}
+.o1{width:46vmax;height:46vmax;left:-12vmax;top:-10vmax;background:var(--acc)}
+.o2{width:38vmax;height:38vmax;right:-10vmax;top:30vh;background:var(--acc2);animation-delay:-8s}
+.o3{width:34vmax;height:34vmax;left:20vw;bottom:-16vmax;background:#2fd4c0;animation-delay:-14s}
+@keyframes drift{to{transform:translate3d(6vmax,4vmax,0) scale(1.12)}}
+.glass{background:var(--glass);backdrop-filter:blur(32px) saturate(1.6);-webkit-backdrop-filter:blur(32px) saturate(1.6);border:1px solid var(--edge);border-radius:28px;box-shadow:0 1px 0 var(--edge) inset,0 24px 60px -20px var(--shadow);transition:transform .25s ease,background .25s}
+.glass.tilt{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateZ(0)}
+.tilt:hover{background:var(--glass2)}
+main{max-width:1080px;margin:0 auto;padding:28px 18px 130px}
+.view{display:none}.view.on{display:block;animation:in .5s ease both}
+@keyframes in{from{opacity:0;transform:translateY(14px) scale(.985)}}
+h1,h2,h3{line-height:1.15;margin:0}
+h1{font-size:clamp(2.4rem,7vw,4.6rem);letter-spacing:-.03em;font-weight:700}
+h2{font-size:clamp(1.5rem,3.5vw,2rem);letter-spacing:-.02em;margin:56px 4px 18px}
+h3{font-size:1.1rem}
+p{margin:0}
+.hero{padding:clamp(26px,5vw,56px);display:grid;gap:22px;margin-top:10px}
+.who{display:flex;align-items:center;gap:16px;color:var(--mute)}
+.avatar{width:84px;height:84px;object-fit:cover;border:2px solid var(--edge);border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:1.3rem;color:#fff;background:linear-gradient(135deg,var(--acc),var(--acc2));box-shadow:0 10px 30px -8px var(--acc)}
+.lead{font-size:1.15rem;color:var(--mute);max-width:62ch}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.btn{appearance:none;border:1px solid var(--edge);background:var(--glass2);color:var(--ink);font:inherit;font-weight:600;padding:11px 20px;border-radius:999px;cursor:pointer;text-decoration:none;backdrop-filter:blur(20px);transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.pri{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;border-color:transparent}
+.btn:focus-visible,.dock button:focus-visible,.chip:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:16px}
+.stat{padding:20px}
+.stat b{display:block;font-size:2rem;letter-spacing:-.02em}
+.stat span{color:var(--mute);font-size:.9rem}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+.card{padding:24px;display:flex;flex-direction:column;gap:12px}
+.card ul{margin:0;padding-left:18px;color:var(--mute);font-size:.95rem}
+.card li{margin:4px 0}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.tag{font-size:.78rem;padding:3px 10px;border-radius:999px;background:var(--glass2);border:1px solid var(--edge)}
+.sub{color:var(--mute);font-size:.88rem}
+.tl{display:grid;gap:16px}
+.job{padding:26px}
+.job header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;margin-bottom:8px}
+.job ul{margin:8px 0 0;padding-left:20px;color:var(--mute)}
+.job li{margin:7px 0}
+.skills{padding:24px;display:grid;gap:16px}
+.skills h3{font-size:.95rem;margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:inherit;font-size:.9rem;padding:6px 14px;border-radius:999px;background:var(--glass2);border:1px solid var(--edge);color:var(--ink)}
+button.chip{cursor:pointer}
+button.chip[aria-pressed="true"]{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;border-color:transparent}
+.filters{margin:6px 0 22px}
+.soon{padding:24px;margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.soon div{padding:18px;border-radius:20px;border:1px dashed var(--edge);color:var(--mute)}
+.soon b{color:var(--ink);display:block}
+.dock-wrap{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;padding:0 12px calc(14px + env(safe-area-inset-bottom,0px));pointer-events:none;z-index:10}
+.dock{pointer-events:auto;display:flex;gap:4px;padding:8px;border-radius:999px;max-width:100%;overflow-x:auto}
+.dock button{appearance:none;border:0;background:transparent;color:var(--ink);font:inherit;font-weight:600;font-size:.92rem;padding:10px 16px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:background .2s,transform .2s}
+.dock button:hover{background:var(--glass2);transform:translateY(-2px)}
+.dock button[aria-current="page"]{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff}
+.foot{text-align:center;color:var(--mute);margin-top:48px;font-size:.9rem}
+.toast{position:fixed;left:50%;bottom:calc(88px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;padding:10px 18px;border-radius:999px;transition:.3s;z-index:11;pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.about{padding:28px;max-width:780px}.about p+p{margin-top:14px}.about p{color:var(--mute);font-size:1.05rem}
+.card[role=button]{cursor:pointer}.card[role=button]:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.more{font-size:.88rem;font-weight:600;color:var(--acc)}
+.btn[hidden]{display:none}
+.scrim{position:fixed;inset:0;z-index:20;display:none;place-items:center;padding:calc(20px + env(safe-area-inset-top,0px)) 20px calc(20px + env(safe-area-inset-bottom,0px));background:rgba(10,12,30,.45);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.scrim.on{display:grid}
+.sheet{width:min(680px,100%);max-height:100%;overflow:auto;padding:30px;position:relative;animation:in .3s ease both;background:color-mix(in srgb,var(--bg1) 84%,transparent)}
+.sheet h3{font-size:1.5rem;margin:0 74px 4px 0}
+.sec{margin-top:20px}.sec h4{margin:0 0 6px;font-size:.95rem}.sec ul{margin:0;padding-left:20px;color:var(--mute)}.sec p{color:var(--mute)}
+.x{position:absolute;top:16px;right:16px;cursor:pointer}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.flow i{font-style:normal;color:var(--mute)}
+.who{flex-wrap:wrap}.open{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:999px;background:var(--glass2);border:1px solid var(--edge);color:var(--ink);font-size:.88rem;font-weight:600}.open i{width:9px;height:9px;border-radius:50%;background:#2fd47a;box-shadow:0 0 0 4px rgba(47,212,122,.25)}
+.tline{position:relative;padding-left:28px;display:grid;gap:14px}.tline::before{content:"";position:absolute;left:8px;top:8px;bottom:8px;width:2px;border-radius:2px;background:linear-gradient(var(--acc),var(--acc2));opacity:.6}
+.tl-i{position:relative;padding:16px 22px}.tl-i::before{content:"";position:absolute;left:-26px;top:22px;width:12px;height:12px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 4px var(--glass2)}
+.tl-i b{display:block}.tl-i span{color:var(--mute);font-size:.93rem}
+.msg{padding:10px 14px;border-radius:18px;margin-top:10px;max-width:92%;white-space:pre-wrap}.msg.me{margin-left:auto;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff}.msg.bot{background:var(--glass2);border:1px solid var(--edge)}
+#msgs{max-height:34vh;overflow:auto}.askrow{display:flex;gap:8px;margin-top:14px}
+.askrow input,.qin{flex:1;min-width:0;width:100%;font:inherit;padding:11px 18px;border-radius:999px;border:1px solid var(--edge);background:var(--glass2);color:var(--ink)}
+.askrow input:focus-visible,.qin:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.hit{display:flex;flex-direction:column;align-items:flex-start;width:100%;text-align:left;font:inherit;color:var(--ink);background:transparent;border:0;border-radius:16px;padding:10px 14px;cursor:pointer}
+.hit:hover,.hit:focus-visible{background:var(--glass2);outline:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i></div>
+<main>
+<section id="home" class="view">
+  <div class="glass hero">
+    <div class="who"><img class="avatar" alt="Anand Srinet" src="data:image/jpeg;base64,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"><span>Bangalore, India</span><span class="open"><i></i>Open to opportunities</span></div>
+    <h1>Anand Srinet</h1>
+    <p class="lead">Generative AI Engineer with 3.7+ years of experience building production AI systems: agentic workflows, hybrid RAG pipelines and LLM automation for enterprise clients.</p>
+    <div class="row">
+      <button class="btn pri" data-go="projects">View all projects</button>
+      <a class="btn" href="mailto:infoanandsrinet@gmail.com">infoanandsrinet@gmail.com</a>
+      <button class="btn" id="copy">Copy email</button>
+      <a class="btn" href="resume.pdf" download="Anand_Srinet_Resume.pdf">Download resume</a>
+      <button class="btn" id="askbtn" hidden>Ask about Anand</button>
+      <a class="btn" href="https://linkedin.com/in/anandsingh1308" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="glass stat tilt"><b>70%</b><span>less manual processing time</span></div>
+    <div class="glass stat tilt"><b>92%+</b><span>retrieval accuracy on clinical documents</span></div>
+    <div class="glass stat tilt"><b>1M+</b><span>API requests a month served</span></div>
+    <div class="glass stat tilt"><b>500+</b><span>manual hours saved per quarter</span></div>
+  </div>
+
+  <h2 id="about">About</h2>
+  <div class="glass about">
+    <p>I’m a Generative AI Engineer who turns language models into systems that businesses rely on every day. My work spans agentic workflows, retrieval-augmented generation and Text-to-SQL, delivered for healthcare and analytics clients.</p>
+    <p>At Deloitte I shipped 6+ production GenAI solutions that automate healthcare document workflows and serve over a million API requests a month. At Quantzig I build conversational analytics on the Databricks Lakehouse, with semantic caching and automated evaluation built in from the start.</p>
+    <p>I care about answers that are accurate, fast and easy to verify. Right now I’m exploring Graph RAG, small language model fine-tuning and Databricks Apps.</p>
+  </div>
+
+  <h2 id="experience">Experience</h2>
+  <div class="tl">
+    <article class="glass job">
+      <header><h3>Analytics Consultant, Quantzig AI Solutions</h3><span class="sub">July 2026 – Present · Bangalore</span></header>
+      <ul>
+        <li>Built two production conversational analytics bots on the Databricks Lakehouse: Text-to-SQL for static datasets and hybrid SQL + RAG for daily-refreshed data, both queried through Genie over Unity Catalog Delta Tables.</li>
+        <li>Designed an event-driven ingestion pipeline that detects Delta Table updates and triggers chunking and embedding jobs automatically.</li>
+        <li>Added semantic caching to cut redundant LLM calls, latency and cost.</li>
+        <li>Built an LLM-as-a-Judge framework scoring accuracy, relevance and hallucinations, with borderline cases flagged for human review.</li>
+      </ul>
+    </article>
+    <article class="glass job">
+      <header><h3>SDE-1, Deloitte Digital</h3><span class="sub">Feb 2023 – July 2026 · Gurugram</span></header>
+      <ul>
+        <li>Delivered 6+ production GenAI solutions with LangChain and LangGraph, automating healthcare workflows for 10K+ documents a month.</li>
+        <li>Built enterprise RAG with hybrid retrieval: 92%+ accuracy on clinical documents at sub-2-second latency.</li>
+        <li>Engineered FastAPI services handling 1M+ requests a month, plus multimodal GenAI tools that sped up product iteration by 40%.</li>
+        <li>Owned prompt engineering for Avatar Creation, improving persona consistency and instruction following.</li>
+      </ul>
+    </article>
+  </div>
+
+  <h2 id="timeline">Career timeline</h2>
+  <div class="tline" id="tline"></div>
+
+  <h2 id="skills">Skills</h2>
+  <div class="glass skills" id="skillbox"></div>
+
+  <h2>Certifications and awards</h2>
+  <div class="grid" id="certs"></div>
+
+  <h2>Education</h2>
+  <div class="grid">
+    <div class="glass card tilt"><h3>Master of Computer Applications</h3><p class="sub">Chandigarh University (Distance Learning) · 2022 – 2024</p></div>
+    <div class="glass card tilt"><h3>Bachelor of Computer Applications</h3><p class="sub">Prof. Rajendra Singh (Rajju Bhaiya) University, Allahabad State University · 2019 – 2022</p></div>
+  </div>
+</section>
+
+<section id="projects" class="view">
+  <div class="glass hero">
+    <h1>Projects</h1>
+    <p class="lead">Everything I have built so far, from enterprise GenAI systems to personal agents. Filter by area.</p>
+  </div>
+  <div class="row filters" id="filters" role="group" aria-label="Filter projects" style="margin-top:22px"></div>
+  <div class="grid" id="plist"></div>
+  <div class="glass soon">
+    <div><b>GitHub activity</b>Repositories and contribution graph will appear here once connected.</div>
+    <div><b>LeetCode progress</b>Solved problems and streak will appear here once connected.</div>
+  </div>
+</section>
+</main>
+
+<div class="dock-wrap"><nav class="glass dock" aria-label="Main">
+  <button data-go="home">Home</button>
+  <button data-go="home" data-t="about">About</button>
+  <button data-go="home" data-t="experience">Experience</button>
+  <button data-go="home" data-t="skills">Skills</button>
+  <button data-go="projects">Projects</button>
+  <button id="sq" aria-label="Search projects, press slash">Search</button>
+</nav></div>
+<div class="scrim" id="ask"><div class="glass sheet" role="dialog" aria-modal="true" aria-label="Ask about Anand"><button class="chip x" id="askx">Close</button><h3>Ask about Anand</h3><p class="sub">Answers come from the content on this site.</p><div class="chips" id="sugg" style="margin-top:12px"></div><div id="msgs" aria-live="polite"></div><div class="askrow"><input id="q" placeholder="Ask about experience, projects or skills" aria-label="Your question"><button class="btn pri" id="send">Ask</button></div></div></div>
+<div class="scrim" id="qs"><div class="glass sheet" role="dialog" aria-modal="true" aria-label="Search projects"><h3>Search projects</h3><p class="sub">Press / anywhere to open this. H goes home, P opens projects.</p><input class="qin" id="qin" placeholder="Try LangGraph, Genie or RAG" aria-label="Search projects" style="margin:14px 0 8px"><div id="qres"></div></div></div>
+<div class="scrim" id="scrim"><div class="glass sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="st"></div></div>
+<div class="glass toast" id="toast" role="status">Email copied</div>
+
+<script>
+var PROJECTS=[{"t": "CaseSense AI: Salesforce case management", "c": ["Agentic AI", "GenAI"], "k": "Personal / Innovation", "s": ["Python", "LangGraph", "LiteLLM", "FastAPI"], "p": "Support teams spend time triaging Salesforce cases that could be resolved automatically or sent to the right person.", "f": ["New case", "Routing agent", "Knowledge base search", "Auto-resolve or escalate"], "b": ["Multi-agent system with 3 specialised agents automating end-to-end customer support workflows.", "Self-learning knowledge base with semantic search (384-dim embeddings) reaching top-3 retrieval accuracy.", "LiteLLM gateway giving one interface across OpenAI and Anthropic.", "MCP server enabling Claude Desktop integration for Salesforce."], "r": "85%+ routing accuracy for auto-resolve versus escalate."}, {"t": "Text-to-SQL conversational analytics bot", "c": ["Databricks", "GenAI"], "k": "Quantzig AI Solutions · 2026", "s": ["Genie", "Unity Catalog", "Delta Lake"], "p": "Business users needed answers from static structured datasets without writing SQL.", "f": ["Question", "Genie", "Governed SQL on Delta Tables", "Answer"], "b": ["Natural-language querying over static structured datasets through Genie.", "Access governed by Unity Catalog."]}, {"t": "Hybrid SQL + RAG analytics bot", "c": ["Databricks", "GenAI"], "k": "Quantzig AI Solutions · 2026", "s": ["Mosaic AI Vector Search", "Genie", "Delta Lake", "Semantic caching"], "p": "Daily-refreshed data needs both exact numbers and context from documents, without paying for the same LLM call twice.", "f": ["Question", "Semantic cache", "SQL via Genie or RAG retrieval", "Answer"], "b": ["Answers questions over daily-refreshed data by combining SQL and retrieval.", "Semantic caching avoids redundant LLM calls on repeated query patterns."], "r": "Lower latency and cost on repeated queries."}, {"t": "Event-driven ingestion pipeline", "c": ["Databricks"], "k": "Quantzig AI Solutions · 2026", "s": ["Delta Tables", "Databricks Workflows", "Embeddings"], "p": "A vector store goes stale when source data changes, and refreshing it by hand does not scale.", "f": ["Delta Table update", "Event trigger", "Chunking", "Embedding", "Vector store"], "b": ["Monitors source Delta Tables for updates.", "Auto-triggers chunking and embedding jobs."], "r": "The vector store stays fresh with zero manual intervention."}, {"t": "LLM-as-a-Judge evaluation framework", "c": ["GenAI", "Databricks"], "k": "Quantzig AI Solutions · 2026", "s": ["LLM-as-a-Judge", "MLflow", "Automated evals"], "p": "Bot quality is hard to track by eye as data and questions change.", "b": ["Continuously scores bot answers on accuracy, relevance and hallucination.", "Flags borderline cases for human review."], "r": "Ongoing quality scoring, with people reviewing only the borderline cases."}, {"t": "Applied POCs: Graph RAG, SLMs and Databricks Apps", "c": ["GenAI", "Databricks"], "k": "Quantzig AI Solutions · 2026 · In progress", "s": ["Graph RAG", "SLM fine-tuning", "Databricks Apps"], "p": "Choosing the right retrieval and deployment approach before committing to it.", "b": ["Benchmarking Graph RAG against traditional RAG for multi-hop Q&A.", "Fine-tuning small language models for query intent analysis.", "Evaluating Databricks Apps for native GenAI deployment."]}, {"t": "Healthcare document automation", "c": ["GenAI", "Agentic AI"], "k": "Deloitte Digital · 2023 – 2026", "s": ["LangChain", "LangGraph", "LLMs"], "p": "Healthcare teams were handling large volumes of documents by hand.", "b": ["6+ production GenAI solutions built with LangChain and LangGraph.", "Automated healthcare workflows for 10K+ documents a month."], "r": "70% less processing time."}, {"t": "Enterprise clinical RAG system", "c": ["GenAI"], "k": "Deloitte Digital · 2023 – 2026", "s": ["Hybrid retrieval", "Elasticsearch", "RAG"], "p": "Users needed accurate answers from clinical documents, quickly.", "b": ["Enterprise RAG with hybrid retrieval over clinical documents."], "r": "92%+ retrieval accuracy with responses under 2 seconds."}, {"t": "Multilingual multi-drug chatbot", "c": ["GenAI"], "k": "Deloitte Digital · POC", "s": ["Python", "LangChain", "Elasticsearch", "RAG"], "p": "Drug information had to be served accurately across languages without drifting off topic.", "f": ["Greeting", "Language detection", "Hybrid retrieval", "Drug information", "Out-of-context redirect"], "b": ["Controlled conversational flow using RAG and Elasticsearch vector search.", "Hybrid retrieval and language detection, with a consistent persona and safety guardrails."]}, {"t": "Avatar Creation prompt engineering", "c": ["GenAI"], "k": "Deloitte Digital", "s": ["Prompt engineering"], "p": "Avatars needed to stay in character and follow instructions reliably.", "b": ["Wrote and iterated prompts for persona consistency, instruction following and response quality."], "r": "Better persona consistency and response quality."}, {"t": "High-volume FastAPI backend services", "c": ["Backend"], "k": "Deloitte Digital", "s": ["FastAPI", "Async", "REST"], "p": "GenAI features needed a backend that stays fast and reliable under heavy traffic.", "b": ["API design, async performance tuning and resilient error handling."], "r": "Supports 1M+ API requests a month."}, {"t": "Multimodal GenAI tooling", "c": ["GenAI", "Backend"], "k": "Deloitte Digital", "s": ["Document extraction", "App review analysis", "UX insights"], "p": "Teams were spending hours on manual document and app-review analysis.", "b": ["Built tools for document extraction, app review analysis and UX insights."], "r": "500+ manual hours saved per quarter and 40% faster product iteration."}];
+var SKILLS={"Languages":["Python","Kotlin","Java"],"AI and GenAI":["LangChain","LangGraph","RAG (Traditional, Hybrid, Graph)","Agentic AI","Prompt Engineering","GPT-4","Claude","SLM Fine-Tuning","Azure OpenAI","ChromaDB","Pinecone","Elasticsearch","Semantic Search","TensorFlow","PyTorch","Sentence-Transformers"],"Evaluation and optimisation":["LLM-as-a-Judge","Automated Evals","Semantic Caching","Prompt Caching","Text-to-SQL"],"Databricks Lakehouse":["Genie","Unity Catalog","Delta Lake","Databricks Apps","Mosaic AI Vector Search","MLflow","Workflows"],"Cloud and infrastructure":["AWS (S3, Lambda, EC2)","Docker","CI/CD","Microservices"],"Frameworks and tools":["FastAPI","LiteLLM","REST APIs","Git","JIRA","Postman"],"Mobile":["Android SDK","Jetpack Compose","Health Connect","MVVM"]};
+var CERTS=[["Databricks Certified Generative AI Engineer Associate","Databricks · 2026"],["Claude Certified Developer – Foundations","Anthropic · 2026"],["AI Agents using LangChain","DeepLearning.AI · 2024"],["Generative AI Fundamentals accreditation","Databricks · 2024"],["Salesforce Certified Platform Developer I and Associate","Salesforce · 2023"],["Deloitte Applause Award, 2x recipient","2023, 2024 · for GenAI innovation"]];
+var $=function(s){return document.querySelector(s)};
+function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e}
+var sb=$("#skillbox");
+Object.keys(SKILLS).forEach(function(k){var d=el("div","",'<h3>'+k+'</h3>');var r=el("div","chips");SKILLS[k].forEach(function(s){r.appendChild(el("span","chip",s))});d.appendChild(r);sb.appendChild(d)});
+CERTS.forEach(function(c){$("#certs").appendChild(el("div","glass card tilt",'<h3>'+c[0]+'</h3><p class="sub">'+c[1]+'</p>'))});
+var cats=["All","GenAI","Agentic AI","Databricks","Backend"],cur="All";
+function drawFilters(){var f=$("#filters");f.innerHTML="";cats.forEach(function(c){var b=el("button","chip",c);b.setAttribute("aria-pressed",c===cur);b.onclick=function(){cur=c;drawFilters();drawProjects()};f.appendChild(b)})}
+function drawProjects(){var l=$("#plist");l.innerHTML="";PROJECTS.filter(function(p){return cur==="All"||p.c.indexOf(cur)>-1}).forEach(function(p){
+  var a=el("article","glass card tilt",'<h3>'+p.t+'</h3><p class="sub">'+p.k+'</p><p class="sub">'+p.b[0]+'</p>');
+  var t=el("div","tags");p.s.forEach(function(s){t.appendChild(el("span","tag",s))});a.appendChild(t);a.appendChild(el("span","more","View details"));
+  a.tabIndex=0;a.setAttribute("role","button");a.setAttribute("aria-label","View details: "+p.t);
+  a.onclick=function(){openP(p,a)};a.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();openP(p,a)}};l.appendChild(a)})}
+var sc=$("#scrim"),sh=$("#sheet"),last=null;
+function openP(p,from){last=from;
+  var h='<button class="chip x" id="x">Close</button><h3 id="st">'+p.t+'</h3><p class="sub">'+p.k+'</p>';
+  h+='<div class="sec"><h4>The problem</h4><p>'+p.p+'</p></div>';
+  if(p.f)h+='<div class="sec"><h4>How it flows</h4><div class="flow">'+p.f.map(function(x,i){return(i?'<i>›</i>':'')+'<span class="tag">'+x+'</span>'}).join("")+'</div></div>';
+  h+='<div class="sec"><h4>What I built</h4><ul>'+p.b.map(function(x){return"<li>"+x+"</li>"}).join("")+'</ul></div>';
+  if(p.r)h+='<div class="sec"><h4>Result</h4><p>'+p.r+'</p></div>';
+  h+='<div class="sec"><h4>Stack</h4><div class="tags">'+p.s.map(function(x){return'<span class="tag">'+x+'</span>'}).join("")+'</div></div>';
+  sh.innerHTML=h;sc.classList.add("on");document.body.style.overflow="hidden";sh.scrollTop=0;$("#x").focus();$("#x").onclick=closeP}
+function closeP(){sc.classList.remove("on");document.body.style.overflow="";if(last)last.focus()}
+sc.addEventListener("click",function(e){if(e.target===sc)closeP()});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&sc.classList.contains("on"))closeP()});
+drawFilters();drawProjects();
+function route(){var v=(location.hash||"#home").slice(1);if(v!=="projects")v="home";
+  document.querySelectorAll(".view").forEach(function(s){s.classList.toggle("on",s.id===v)});
+  document.querySelectorAll(".dock [data-go]").forEach(function(b){var on=b.dataset.go===v&&!b.dataset.t;if(on)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")});
+  document.title=(v==="projects"?"Projects – ":"")+"Anand Srinet – Generative AI Engineer"}
+var pending=null;
+document.querySelectorAll("[data-go]").forEach(function(b){b.addEventListener("click",function(){
+  var g=b.dataset.go,t=b.dataset.t;pending=t||null;
+  if(location.hash==="#"+g||(!location.hash&&g==="home")){route();after()}else location.hash=g;
+  if(!t)window.scrollTo({top:0,behavior:"smooth"})})});
+function after(){if(pending){var e=document.getElementById(pending);pending=null;if(e)setTimeout(function(){e.scrollIntoView({behavior:"smooth",block:"start"})},60)}}
+window.addEventListener("hashchange",function(){route();after()});route();
+$("#copy").onclick=function(){var m="infoanandsrinet@gmail.com",ok=function(){var t=$("#toast");t.classList.add("on");setTimeout(function(){t.classList.remove("on")},1800)};
+  try{navigator.clipboard.writeText(m).then(ok,function(){prompt("Copy email",m)})}catch(e){prompt("Copy email",m)}};
+document.addEventListener("pointermove",function(e){var c=e.target.closest&&e.target.closest(".tilt");if(!c||e.pointerType==="touch")return;
+  var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.setProperty("--ry",x*8+"deg");c.style.setProperty("--rx",-y*8+"deg")});
+document.addEventListener("pointerout",function(e){var c=e.target.closest&&e.target.closest(".tilt");if(c){c.style.setProperty("--rx","0deg");c.style.setProperty("--ry","0deg")}});
+
+var TL=[["2019","Started BCA","Prof. Rajendra Singh (Rajju Bhaiya) University, Allahabad State University"],["2022","Completed BCA, started MCA","MCA at Chandigarh University (Distance Learning)"],["Feb 2023","Joined Deloitte Digital as SDE-1","Began delivering production GenAI solutions for healthcare"],["2023","Salesforce Certified Platform Developer I and Associate","Also received the first Deloitte Applause Award"],["2024","AI Agents using LangChain, Databricks Generative AI Fundamentals","Completed MCA and received a second Deloitte Applause Award"],["July 2026","Joined Quantzig AI Solutions as Analytics Consultant","Building conversational analytics on the Databricks Lakehouse"],["2026","Databricks Certified Generative AI Engineer Associate","Also earned Claude Certified Developer – Foundations from Anthropic"]];
+TL.forEach(function(t){$("#tline").appendChild(el("div","glass tl-i",'<span>'+t[0]+'</span><b>'+t[1]+'</b><span>'+t[2]+'</span>'))});
+function closeAll(){document.querySelectorAll(".scrim.on").forEach(function(s){s.classList.remove("on")});document.body.style.overflow=""}
+function openOv(o){o.classList.add("on");document.body.style.overflow="hidden"}
+var askO=$("#ask"),msgs=$("#msgs"),hist=[],smp=null,qs=$("#qs"),qi=$("#qin"),qr=$("#qres");
+try{if(window.claude&&claude.use)claude.use("sample").then(function(s){if(s){smp=s;$("#askbtn").hidden=false}}).catch(function(){})}catch(e){}
+function ctx(){return"You are the assistant on Anand Srinet’s portfolio website. Answer visitors’ questions about Anand in the third person, using only the facts below. Be friendly, specific and concise (under 90 words). If the facts do not cover the question, say so and suggest emailing infoanandsrinet@gmail.com. Never invent employers, dates, numbers or skills.\n\nFACTS:\n"+JSON.stringify({about:document.querySelector(".about").innerText,experience:document.querySelector("#experience + .tl").innerText,timeline:TL,projects:PROJECTS,skills:SKILLS,certifications:CERTS})}
+function say(r,t){var d=el("div","msg "+r);d.textContent=t;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;return d}
+function ask1(q){q=(q||"").trim();if(!smp||!q)return;$("#q").value="";say("me",q);var d=say("bot","Thinking…");hist.push("Visitor: "+q);
+ smp(ctx()+"\n\nCONVERSATION SO FAR:\n"+hist.slice(-6).join("\n")+"\n\nReply to the visitor’s latest message only.",{modelTier:"quick",cache:false}).then(function(r){d.textContent=r.text;hist.push("Assistant: "+r.text);msgs.scrollTop=msgs.scrollHeight}).catch(function(e){var c=e&&e.code;d.textContent=c==="not_granted"?"Permission was declined, so the assistant can’t answer.":c==="rate_limited"?"Too many questions at once. Try again in a moment.":"The assistant isn’t available right now. Email infoanandsrinet@gmail.com instead."})}
+["What does Anand do?","What did he build at Quantzig?","Which tools does he know best?"].forEach(function(s){var b=el("button","chip",s);b.style.cursor="pointer";b.onclick=function(){ask1(s)};$("#sugg").appendChild(b)});
+$("#askbtn").onclick=function(){openOv(askO);$("#q").focus()};$("#askx").onclick=closeAll;$("#send").onclick=function(){ask1($("#q").value)};$("#q").onkeydown=function(e){if(e.key==="Enter")ask1(this.value)};
+function runQ(){var t=qi.value.toLowerCase().trim();qr.innerHTML="";var hits=PROJECTS.filter(function(p){return!t||(p.t+" "+p.s.join(" ")+" "+p.c.join(" ")+" "+p.b.join(" ")+" "+p.k).toLowerCase().indexOf(t)>-1});
+ if(!hits.length){qr.appendChild(el("p","sub","No projects match. Try a tool name such as LangGraph or Genie."));return}
+ hits.slice(0,8).forEach(function(p){var b=el("button","hit",'<b>'+p.t+'</b><span class="sub">'+p.k+'</span>');b.onclick=function(){closeAll();location.hash="projects";setTimeout(function(){openP(p,null)},80)};qr.appendChild(b)})}
+function openQ(){qi.value="";runQ();openOv(qs);qi.focus()}
+$("#sq").onclick=openQ;qi.oninput=runQ;qi.onkeydown=function(e){if(e.key==="Enter"){var f=qr.querySelector(".hit");if(f)f.click()}};
+[askO,qs].forEach(function(s){s.addEventListener("click",function(e){if(e.target===s)closeAll()})});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeAll();return}
+ var t=e.target,typing=t&&(t.tagName==="INPUT"||t.tagName==="TEXTAREA");if(typing||e.metaKey||e.ctrlKey||e.altKey||document.querySelector(".scrim.on"))return;
+ if(e.key==="/"){e.preventDefault();openQ()}else if(e.key==="h"||e.key==="H"){location.hash="home"}else if(e.key==="p"||e.key==="P"){location.hash="projects"}});
+</script>
+</body>
+</html>
